@@ -1,0 +1,88 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+#PUBLIC
+# compiled output
+/public/dist
+/public/dist-server
+/public/tmp
+/public/out-tsc
+# dependencies
+/public/node_modules
+/public/src/environments
+# IDEs and editors
+/public/.idea
+/public/.project
+/public/.classpath
+/public/.c9/
+/public/*.launch
+/public/.settings/
+/public/*.sublime-workspace
+# IDE - VSCode
+/public/.vscode/*
+/public/!.vscode/settings.json
+/public/!.vscode/tasks.json
+/public/!.vscode/launch.json
+/public/!.vscode/extensions.json
+# misc
+/public/.sass-cache
+/public/connect.lock
+/public/coverage
+/public/libpeerconnection.log
+/public/npm-debug.log
+/public/testem.log
+/public/typings
+# e2e
+/public/e2e/*.js
+/public/e2e/*.map
+# System Files
+/public/.DS_Store
+/public/Thumbs.db
+
+
+#BACKEND
+# compiled output
+/backend/dist
+/backend/dist-server
+/backend/tmp
+/backend/out-tsc
+# dependencies
+/backend/node_modules
+/backend/src/environments
+# IDEs and editors
+/backend/.idea
+/backend/.project
+/backend/.classpath
+/backend/.c9/
+/backend/*.launch
+/backend/.settings/
+/backend/*.sublime-workspace
+# IDE - VSCode
+/backend/.vscode/*
+/backend/!.vscode/settings.json
+/backend/!.vscode/tasks.json
+/backend/!.vscode/launch.json
+/backend/!.vscode/extensions.json
+# misc
+/backend/.sass-cache
+/backend/connect.lock
+/backend/coverage
+/backend/libpeerconnection.log
+/backend/npm-debug.log
+/backend/testem.log
+/backend/typings
+# e2e
+/backend/e2e/*.js
+/backend/e2e/*.map
+# System Files
+/backend/.DS_Store
+/backend/Thumbs.db
+
+
+# SERVER
+# dependencies
+/server/node_modules
+/server/config.js
+
+
+#DATABASE
+/database/*
