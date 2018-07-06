@@ -1,0 +1,123 @@
+// =============================================================================
+// IMPORT
+// =============================================================================
+@import "../../../assets/styles/ui_mixines";
+
+section.discovery{
+	background-color: #f2f2f2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	overflow: hidden;
+	justify-content: space-around;
+	align-items: center;
+
+	div.inner_container{
+		width: 100%;
+		max-width: 375px;
+		background-color: #fff;
+		min-height: 667px;
+		position: relative;
+		box-shadow: 0px 0px 2px rgba(black, .1);
+
+		div.header{
+			margin: 20px 0 60px;
+
+			img{
+				width: 90%;
+				margin: 0 auto;
+				max-width: 100px;
+				display: block;
+				transition: all 200ms;
+			}
+		}
+		div.body{
+			width: 90%;
+			margin: 0 auto;
+			div.input_group{
+				width: 100%;
+				margin: 30px 0;
+		
+				&:first-child{ margin-top: 0; }
+				&:last-child{ margin-bottom: 0; }
+				label{
+					font-size: 12px;
+					font-weight: 600;
+					font-family: helvetica;
+					display: block;
+					margin-bottom: 5px;
+
+					span.required{
+						color: #e15944;
+					}
+				}
+				input{
+					font-size: 16px;
+					color: #303030;
+					width: calc(100% - 24px);
+					padding: 12px 12px;
+					border: none;
+					border: 1px solid #303033;
+					border-radius: 3px;
+					font-weight: 400;
+				}
+				p.informational_message{
+					font-size: 12px;
+					font-weight: 200;
+					font-family: helvetica;
+					color: #e15944;
+					margin-top: 5px;
+
+					&::ng-deep span{
+						font-family: 'font_awesome';
+						font-weight: 300;
+					}
+				}
+				&.checkbox{
+					overflow: auto;
+					min-height: 15px;
+
+					input{
+						display: inline;
+						float: left;
+						width: auto;
+						margin: 0;
+					}
+					label{
+						display: inline;
+						float: left;
+						margin: 0 0 0 10px;
+						font-weight: 400;
+						line-height: 17px;
+					}
+				}
+			}
+		}
+		div.footer{
+			position: absolute;
+			bottom: 0px;
+			left: 0;
+			right: 0;
+			height: 70px;
+
+			a.button{
+				background-color: $classic_blue;
+				color: #fff;
+				width: calc(90% - 64px);
+				display: block;
+				margin: 0 auto;
+				max-width: 320px;
+				font-size: 18px;
+				border-radius: 50px;
+				text-decoration: none;
+				text-align: center;
+				font-family: helvetica, sans-serif;
+				padding: 16px 32px;
+				cursor: pointer;
+			}
+		}
+	}
+}

@@ -2,11 +2,12 @@
 const express = require('express'),
     app = express(),
     server = require('http').createServer(app),
+    io = require('socket.io')(server),
     config = require('./config'),    
     morgan = require('morgan');
 
-// CONFIGURATION
-server.listen(config.port);
+//HELPERS
+const littlebirds = require('./helpers/littlebirds');
 
 // CORS
 app.use(function(req, res, next) {
@@ -20,6 +21,11 @@ app.use(function(req, res, next) {
     }
 });
 
+//SOCKET.IO
+io.set('origins', '*:*');
+app.set('socketio', io);
+littlebirds.discovery_connector( io );
+
 // ALLOW STATIC IMAGES
 app.use('/uploads', express.static('uploads'))
 
@@ -28,3 +34,6 @@ app.use(morgan('dev'));
 
 // ROUTES
 app.use('/public', require('./controllers/public').public);
+
+// CONFIGURATION
+server.listen(config.port);

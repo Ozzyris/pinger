@@ -1,0 +1,20 @@
+<section class="discovery">
+	<div class="inner_container">
+		<div class="header">
+			<img src="../../assets/images/logo.jpg" alt="">
+
+			<div class="signup">
+				<img routerLink="/signup" src="../../assets/images/user-add.svg" alt="">
+			</div>
+		</div>
+		<div class="body">
+			<p class="header">Who are you playing as?</p>
+			<div class="card_component">
+				<div class="card" *ngFor="let player of players | async" (click)="create_game(player._id)">
+					<div class="header_picture" [style.backgroundImage]="'url(' + server_url +  player.avatar + ')'"></div>
+					<p>{{player.name}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -23,6 +23,7 @@ games.statics.add_player = function( game_id, match_id ){
     })
 };
 
+
 var games = mongoose.DB.model('games', games);
 
 module.exports.games = games

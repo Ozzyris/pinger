@@ -1,0 +1,101 @@
+// =============================================================================
+// IMPORT
+// =============================================================================
+@import "../../../assets/styles/ui_mixines";
+
+section.discovery{
+	background-color: #f2f2f2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	div.inner_container{
+		width: 100%;
+		max-width: 375px;
+		background-color: #fff;
+		min-height: 667px;
+		box-shadow: 0px 0px 2px rgba(black, .1);
+
+		div.header{
+			margin: 20px 0 60px;
+			position: relative;
+			img{
+				width: 90%;
+				margin: 0 auto;
+				max-width: 100px;
+				display: block;
+			}
+
+			div.signup{
+				img{
+					width: 30px;
+					position: absolute;
+					right: 20px;
+					cursor: pointer;
+					top: 0px;
+				}
+			}
+		}
+		div.body{
+			width: 90%;
+			margin: 0 auto;
+
+			p.header{
+				font-family: helvetica;
+				font-weight: bold;
+			}
+			div.card_component{
+				display: flex;
+				align-items: space-around;
+				justify-content: space-between;
+				flex-flow: row wrap;
+
+				div.card{
+					box-shadow: 0px 0px 2px rgba(black, .1);
+					width: calc(33% - 10px);
+					margin: 0 0 20px;
+					border-radius: 2px;
+					cursor: pointer;
+
+					div.header_picture{
+						width: calc((337px / 3) - 10px);
+						height: calc((337px / 3) - 10px);
+						background-size: cover;
+						background-position: center center;
+					}
+					p{
+						padding: 5px 0 5px 5px;
+						margin: 0;
+						font-family: helvetica;
+						font-weight: 200;
+						font-size: 12px;
+
+					}
+				}
+			}
+		}
+
+
+	}
+}
+
+/*
+    SMALL SCREEN COMPUTER VERSION
+*/
+@media screen and (min-width: 992px ){}
+
+/*
+    LARGE SCREEN COMPUTER VERSION
+*/
+@media screen and (min-width: 1200px ){}
+
+
+/*
+    SUPER LARGE SCREEN COMPUTER VERSION
+*/
+@media screen and (min-width: 1600px ){}
