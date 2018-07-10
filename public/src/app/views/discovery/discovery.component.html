@@ -20,6 +20,22 @@
 			</div>
 		</div>
 
+		<div class="no_more_match" *ngIf="is_no_more_swipe">
+			<div class="inner_containers">
+				<div class="header_modal">
+					<div class="icon">
+						<img src="../../assets/images/heart.svg" alt="">
+					</div>
+				</div>
+				<div class="body_modal">
+					<h2>You're out of swipe</h2>
+					<p>Go back to work, you'll get more swipes at {{ (display_countdown |  amFromUnix) | amDateFormat:'hh:mmA'}}.</p>
+				</div>
+				<div class="footer_modal">
+					<a (click)="is_no_more_swipe = fasle" class="button">Close modal</a>
+				</div>
+			</div>
+		</div>
 
 		<div class="header" [ngClass]="{'blur': is_match_found}">
 			<img src="../../assets/images/logo.jpg" alt="">

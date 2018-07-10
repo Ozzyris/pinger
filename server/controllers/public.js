@@ -36,6 +36,27 @@ router.use(bodyParser.json());
 			})
 	});
 
+	router.get('/add-one-swipe/:id', function (req, res) {
+		players.get_details_from_id( req.params.id )
+			.then( user_details => {
+				if( user_details.swipe.swipe_number >= 4 ){
+					if( moment().isAfter( user_details.swipe.last_swipe ) ){
+						return players.reset_swiped_to_one( req.params.id );
+					}else{
+						throw {message: 'No more swipe', code: 'no_more_swipe'}
+					}
+				}else{
+					return players.add_one_swiped( req.params.id );
+				}
+			})
+			.then( is_one_added => {
+				res.status(200).json( {message: 'Swipe Send'} );
+			})
+			.catch( error => {
+				res.status(401).json( error );
+			})
+	});
+
 	function shuffle(a) {
 	    for (let i = a.length - 1; i > 0; i--) {
 	        const j = Math.floor(Math.random() * (i + 1));
@@ -45,8 +66,6 @@ router.use(bodyParser.json());
 	}
 
 	router.get('/get-all-players-minus-you/:id', function (req, res) {
-		console.log(req.params.id);
-
 		players.get_all_players()
 			.then( all_players => {
 				let owner_index = '';
@@ -57,7 +76,6 @@ router.use(bodyParser.json());
 					}
 				}
 
-				console.log( all_players[ owner_index ].name );
 				all_players.splice(owner_index, 1);
 
 				shuffle(all_players)
@@ -72,30 +90,50 @@ router.use(bodyParser.json());
 	});
 
 	router.post('/create-player', function (req, res) {
-		console.log(req.body);
 		let player_detail = {
 			name: req.body.name,
 			email: req.body.email,
 			rocketName: req.body.rocket_name,
 			avatar: 'uploads/' + req.body.avatar,
 		}
+		let rocketLogin;
 
-		new players(player_detail).save()
-			.then( article_id => {
+		players.test_rocket_name( player_detail.rocketName )
+			.then( is_rocket_name_valid => {
+				return new players( player_detail ).save();
+			})
+			.then( player_details => {
+				player_detail._id = player_details._id;
 				return rocketchat.rocket_login()
 			})
 			.then( rocket_login => {
+				rocketLogin = rocket_login;
 				let message = 'A new player was created: ' + player_detail.rocketName;
 				return rocketchat.send_rocket_message( rocket_login, '@alexandre.nicol', message );
+			})
+			.then( is_message_sent => {
+				let message = 'Confirm your new Pinger account on that [link](http://10.117.151.71:4200/confirm-account/' + player_detail._id +')';
+				return rocketchat.send_rocket_message( rocketLogin, player_detail.rocketName, message );
 			})
 			.then( is_message_sent => {
 				res.status(200).json( {message: 'Player created'} );
 			})
 			.catch( error => {
-				console.log(error);
-				res.status(401).json(error);
+				console.log('error ', error);
+				res.status(401).json( error );
 			});
 	});
+
+	router.get('/confirm-account/:id', function (req, res) {
+		players.update_status_from_id( req.params.id )
+			.then(is_status_updated => {
+				res.status(200).json( {message: 'Player activated'} );
+			})
+			.catch(error => {
+				console.log( error );
+				res.status(401).json( error );
+			})
+	})
 
 	router.post('/create-game', function (req, res) {
 		new games( {'players.player1': req.body.id} ).save()
@@ -141,9 +179,25 @@ router.use(bodyParser.json());
 			game_id = req.body.game_id,
 			request;
 
+
 		players.get_details_from_id( owner_details.id )
 			.then( owner_detail => {
 				owner_details = owner_detail;
+				if( owner_details.swipe.swipe_number >= 4 ){
+					if( moment().isAfter( owner_details.swipe.last_swipe ) ){
+						return players.reset_swiped_to_one( owner_details.id );
+					}else{
+						throw {
+							message: 'No more swipe',
+							code: 'no_more_swipe',
+							time: moment( owner_details.swipe.last_swipe ).format("X")
+						}
+					}
+				}else{
+					return players.add_one_swiped( owner_details.id );
+				}
+			})
+			.then( is_swipes_updated => {
 				return players.get_details_from_id( match_details.id )
 			})
 			.then( match_detail => {
@@ -160,14 +214,16 @@ router.use(bodyParser.json());
 				return rocketchat.rocket_login();
 			})
 			.then( rocket_login => {
-				let link = 'http://10.117.151.71:4200/match/' + request._id;
-				return rocketchat.send_match( rocket_login, link, owner_details, match_details );
+				let link = 'http://10.117.151.71:4200/match/' + request._id,
+					message =  owner_details.name + ' want to challenge you at :ping_pong:, click the [here](' + link + ') to accept';
+
+				return rocketchat.send_rocket_message( rocket_login, match_details.rocketName, message );
 			})
 			.then( is_rocket_sent => {
 				res.status(200).json( {message: 'Request send'} );
 			})
 			.catch( error => {
-				console.log(error);
+				res.status(401).json( error );
 			})
 	})
 
@@ -197,7 +253,9 @@ router.use(bodyParser.json());
 				return rocketchat.rocket_login();
 			})
 			.then( rocket_login => {
-				return rocketchat.send_result_match( rocket_login, owner_details, match_details );
+				let message = match_details.name + ' accepted your challenge at :ping_pong:, go get it!';
+
+				return rocketchat.send_rocket_message( rocket_login, owner_details.rocketName, message );
 			})
 			.then( is_message_sent => {
 				return requests.update_status_of_the_request( req.params.id );

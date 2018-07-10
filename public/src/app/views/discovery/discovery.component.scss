@@ -103,6 +103,81 @@ section.discovery{
 			}
 		}
 
+		div.no_more_match{
+			position: absolute;
+			top: 0;left: 0;bottom: 0;right: 0;
+			background-color: rgba(black, .6);
+			z-index: 101;
+
+			div.inner_containers{
+				width: calc(90% - 12px);
+				padding: 12px;
+				margin: 150px auto 0;
+				box-shadow: 0px 0px 2px rgba(black, .1);
+				background-color: white;
+				border-radius: 3px;
+
+				div.header_modal{
+					margin: 0;
+					position: relative;
+					height: 40px;
+
+					div.icon{
+						width: 100px;
+						height: 100px;
+						background-color: white;
+						position: absolute;
+						top: -60px;
+						border-radius: 60px;
+						left: calc(50% - 50px);
+
+						img{
+							width: 50px;
+							margin: 25px 0 0 25px;
+						}
+					}
+				}
+				div.body_modal{
+					width: 100%;
+					display: block;
+
+					h2{
+						float: initial;
+						width: 100%;
+						color: #303030;
+						text-align: center;
+						font-family: helvetica;
+					}
+					p{
+						float: initial;
+						width: 100%;
+						color: #303030;
+						text-align: center;
+						font-family: helvetica;
+					}
+				}
+				div.footer_modal{
+					padding-top: 40px;
+
+					a.button{
+						background-color: $classic_blue;
+						color: #fff;
+						width: calc(90% - 64px);
+						display: block;
+						margin: 0 auto;
+						max-width: 320px;
+						font-size: 18px;
+						border-radius: 50px;
+						text-decoration: none;
+						text-align: center;
+						font-family: helvetica, sans-serif;
+						padding: 16px 32px;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
 		div.header.blur, div.body.blur, div.footer.blur{
 			filter: blur(4px);
 		}

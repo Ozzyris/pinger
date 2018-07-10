@@ -61,8 +61,9 @@ export class SignupComponent implements OnInit {
 			.subscribe( user_details => {
 					if( user_details ){
 						this.button_text = 'Success';
+						alert("Thanks you to signup, Please validate your account via rocketchat.")
 						let timer = setTimeout(() => {  
-							this.router.navigate(['login']);
+							this.router.navigate(['landing']);
 							clearTimeout(timer);
 						}, 1000);
 					}

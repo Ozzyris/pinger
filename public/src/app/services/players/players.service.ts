@@ -48,6 +48,11 @@ export class players_service {
 		return this.http.get(url, this.httpOptions);
 	}
 
+	confirm_account( id ): Observable<any>{
+		let url = this.base_url + '/confirm-account/' + id;
+		return this.http.get(url, this.httpOptions);
+	}
+
 	get_adversary_detail_from_id( id ): Observable<any>{
 		let url = this.base_url + 'get-adversary-details-from_id',
 			payload = { id: id };

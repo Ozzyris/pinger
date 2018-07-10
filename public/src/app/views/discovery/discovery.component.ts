@@ -24,6 +24,8 @@ export class DiscoveryComponent implements OnInit {
 	oppponent_name: string;
 	oppponent_avatar: string;
 	owner_avatar: string;
+	is_no_more_swipe: boolean = false;
+	display_countdown: any;
 	private socket;
 
 	constructor( private players_service: players_service ){}
@@ -167,15 +169,19 @@ export class DiscoveryComponent implements OnInit {
 					match_id: match_id
 				};
 
-				console.log(payload);
-
 				return this.players_service.marching_player( payload )
 					.subscribe( is_match_send => {
 						console.log( is_match_send )
-					}) 	
+					}, error => {
+						if( error.error.code == 'no_more_swipe'){
+							this.is_no_more_swipe = true;
+							this.display_countdown = error.error.time;
+						}else{
+							console.log( error.error );
+						}
+					})
 
 			})
-				}
-
+	}
 
 }
