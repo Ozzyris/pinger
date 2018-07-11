@@ -4,6 +4,7 @@ const express = require('express'),
 	  players = require('../models/players').players,
 	  moment = require('moment'),
 	  requests = require('../models/requests').requests,
+	  config = require('../config'),
 	  games = require('../models/games').games;
 
 // HELPERS
@@ -112,7 +113,7 @@ router.use(bodyParser.json());
 				return rocketchat.send_rocket_message( rocket_login, '@alexandre.nicol', message );
 			})
 			.then( is_message_sent => {
-				let message = 'Confirm your new Pinger account on that [link](http://10.117.151.71:4200/confirm-account/' + player_detail._id +')';
+				let message = 'Confirm your new Pinger account on that [link]('+ config.front_end_url +'/confirm-account/' + player_detail._id +')';
 				return rocketchat.send_rocket_message( rocketLogin, player_detail.rocketName, message );
 			})
 			.then( is_message_sent => {
@@ -214,7 +215,7 @@ router.use(bodyParser.json());
 				return rocketchat.rocket_login();
 			})
 			.then( rocket_login => {
-				let link = 'http://10.117.151.71:4200/match/' + request._id,
+				let link = config.front_end_url + '/match/' + request._id,
 					message =  owner_details.name + ' want to challenge you at :ping_pong:, click the [here](' + link + ') to accept';
 
 				return rocketchat.send_rocket_message( rocket_login, match_details.rocketName, message );
