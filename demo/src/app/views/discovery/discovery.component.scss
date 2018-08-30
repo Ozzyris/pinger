@@ -1,0 +1,325 @@
+// =============================================================================
+// IMPORT
+// =============================================================================
+@import "../../../assets/styles/ui_mixines";
+
+section.discovery{
+	background-color: #f2f2f2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	overflow: hidden;
+	justify-content: space-around;
+	align-items: center;
+
+	div.inner_container{
+		width: 100%;
+		max-width: 375px;
+		background-color: #fff;
+		min-height: 667px;
+		position: relative;
+		box-shadow: 0px 0px 2px rgba(black, .1);
+
+		div.match{
+			position: absolute;
+			top: 0;left: 0;bottom: 0;right: 0;
+			background-color: rgba(black, .6);
+			z-index: 101;
+
+			div.inner_containers{
+				div.header_modal{
+					h1{
+						color: white;
+						font-family: helvetica;
+						font-weight: 200;
+						text-align: center;
+						font-size: 56px;
+						margin-bottom: 0;
+					}
+					p{
+						color: white;
+						font-family: helvetica;
+						text-align: center;
+						font-weight: 100;
+						font-size: 16px;
+					}
+				}
+				div.body_modal{
+					overflow: auto;
+					height: 300px;
+					margin-top: 50px;
+
+					div.left{
+						width: 50%;
+						float: left;
+
+						div.user_image{
+							display: block;
+							float: right;
+							background-size: cover;
+							background-position: center center;
+							width: 100px;
+							height: 100px;
+							border-radius: 50%;
+							border: 2px solid white;
+							margin-right: 10px;
+						}
+					}
+					div.rigth{
+						width: 50%;
+						float: right;
+
+						div.user_image{
+							display: block;
+							background-size: cover;
+							background-position: center center;
+							width: 100px;
+							height: 100px;
+							border-radius: 50%;
+							border: 2px solid white;
+							margin-left: 10px;
+						}
+					}
+				}
+				div.footer_modal{
+					a.button{
+						display: block;
+						color: white;
+						text-align: center;
+						border: 1px solid white;
+						border-radius: 2px;
+						max-width: 250px;
+						margin: 0 auto;
+						padding: 20px 20px;
+						font-family: helvetica;
+						font-weight: 200;
+						font-size: 16px;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		div.no_more_match{
+			position: absolute;
+			top: 0;left: 0;bottom: 0;right: 0;
+			background-color: rgba(black, .6);
+			z-index: 101;
+
+			div.inner_containers{
+				width: calc(90% - 12px);
+				padding: 12px;
+				margin: 150px auto 0;
+				box-shadow: 0px 0px 2px rgba(black, .1);
+				background-color: white;
+				border-radius: 3px;
+
+				div.header_modal{
+					margin: 0;
+					position: relative;
+					height: 40px;
+
+					div.icon{
+						width: 100px;
+						height: 100px;
+						background-color: white;
+						position: absolute;
+						top: -60px;
+						border-radius: 60px;
+						left: calc(50% - 50px);
+
+						img{
+							width: 50px;
+							margin: 25px 0 0 25px;
+						}
+					}
+				}
+				div.body_modal{
+					width: 100%;
+					display: block;
+
+					h2{
+						float: initial;
+						width: 100%;
+						color: #303030;
+						text-align: center;
+						font-family: helvetica;
+					}
+					p{
+						float: initial;
+						width: 100%;
+						color: #303030;
+						text-align: center;
+						font-family: helvetica;
+					}
+				}
+				div.footer_modal{
+					padding-top: 40px;
+
+					a.button{
+						background-color: $classic_blue;
+						color: #fff;
+						width: calc(90% - 64px);
+						display: block;
+						margin: 0 auto;
+						max-width: 320px;
+						font-size: 18px;
+						border-radius: 50px;
+						text-decoration: none;
+						text-align: center;
+						font-family: helvetica, sans-serif;
+						padding: 16px 32px;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		div.header.blur, div.body.blur, div.footer.blur{
+			filter: blur(4px);
+		}
+		div.header{
+			margin: 20px 0 60px;
+
+			img{
+				width: 90%;
+				margin: 0 auto;
+				max-width: 100px;
+				display: block;
+				transition: all 200ms;
+			}
+		}
+		div.body{
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			transition: all 200ms;
+
+			div.card_container{
+				position: relative;
+				min-height: 300px;
+				min-width: 300px;
+
+				div.card{
+					width: 300px;
+					height: 300px;
+					border-radius: 3px;
+					box-shadow: 0px 0px 2px rgba(black, .1);
+					background-position: center center;
+					background-size: cover;
+					position: absolute;
+					cursor: grab;
+					will-change: transform;
+					transition: all 0.3s ease-in-out;
+					display: inline-block;
+					background-color: white;
+
+					&.moving{
+						cursor: grabbing;
+						transition: none;
+					}
+					div.image{
+						position: absolute;
+						background-size: cover;
+						background-position: center center;
+						top: 0;left: 0;right: 0;bottom: 0;
+						border-radius: 3px;
+					}
+					p{
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						margin: 0;
+						padding: 10px;
+						border-bottom-left-radius: 3px;
+						border-bottom-right-radius: 3px;
+
+						background-color: rgba(black, .5);
+						color: white;
+						font-family: helvetica;
+					}
+				}
+			}
+			div.empty_elem{
+				position: absolute;
+
+				img{
+					max-width: 50px;
+					display: block;
+					margin: 0 auto 20px;
+				}
+				p{
+					font-family: helvetica;
+					color: rgba(black, .5);
+					text-align: center;
+
+				}
+			}
+		}
+		div.footer{
+			overflow: auto;
+			padding: 20px 40px;
+			margin-top: 100px;
+			transition: all 200ms;
+
+			div.left{
+				float: left;
+
+				a.success{
+					cursor: pointer;
+					width: 100px;
+					height: 100px;
+					box-shadow: 0px 0px 10px rgba(black, .2);
+					border-radius: 50%;
+					display: block;
+
+					img{
+						margin: 0px auto 0;
+						padding-top: 25px;
+						display: block;
+						width: 45px;
+					}
+				}
+			}
+			div.right{
+				float: right;
+
+				a.fail{
+					cursor: pointer;
+					width: 100px;
+					height: 100px;
+					box-shadow: 0px 0px 10px rgba(black, .2);
+					border-radius: 50%;
+					display: block;
+
+					img{
+						margin: 0px auto 0;
+						padding-top: 30px;
+						display: block;
+						width: 40px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+    SMALL SCREEN COMPUTER VERSION
+*/
+@media screen and (min-width: 992px ){}
+
+/*
+    LARGE SCREEN COMPUTER VERSION
+*/
+@media screen and (min-width: 1200px ){}
+
+
+/*
+    SUPER LARGE SCREEN COMPUTER VERSION
+*/
+@media screen and (min-width: 1600px ){}

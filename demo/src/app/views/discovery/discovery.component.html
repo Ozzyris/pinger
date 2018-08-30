@@ -1,0 +1,69 @@
+<section class="discovery">
+	<div class="inner_container">
+		<div class="match" *ngIf="is_match_found">
+			<div class="inner_containers">
+				<div class="header_modal">
+					<h1>It's a match</h1>
+					<p>You and {{oppponent_name}} are now adversary</p>
+				</div>
+				<div class="body_modal">
+					<div class="left">
+						<div class="user_image" [style.backgroundImage]="'url(./assets/images/players/' + owner_avatar + ')'"></div>
+					</div>
+					<div class="rigth">
+						<div class="user_image" [style.backgroundImage]="'url(./assets/images/players/' + oppponent_avatar + ')'"></div>
+					</div>
+				</div>
+				<div class="footer_modal">
+					<a class="button" (click)="is_match_found = fasle">Keep searching</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="no_more_match" *ngIf="is_no_more_swipe">
+			<div class="inner_containers">
+				<div class="header_modal">
+					<div class="icon">
+						<img src="../../assets/images/heart.svg" alt="">
+					</div>
+				</div>
+				<div class="body_modal">
+					<h2>You're out of swipe</h2>
+					<p>Go back to work, you'll get more swipes at {{ (display_countdown |  amFromUnix) | amDateFormat:'hh:mmA'}}.</p>
+				</div>
+				<div class="footer_modal">
+					<a (click)="is_no_more_swipe = fasle" class="button">Close modal</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="header" [ngClass]="{'blur': is_match_found}">
+			<img src="../../assets/images/logo.jpg" alt="">
+		</div>
+		<div class="body" [ngClass]="{'blur': is_match_found}">
+			<div class="card_container">
+				<div class="card" *ngFor="let player of players; index as index" [ngClass]="player.class" [ngStyle]="{transform: player.style, 'z-index': 100-(index)}" (swipeleft)="swipe(index, $event.type)" (swiperight)="swipe(index, $event.type)" (panstart)="pan_start( $event, index )" (pan)="pan( $event, index )" (panend)="pan_end( $event, index )">
+					<div class="image" [style.backgroundImage]="'url(./assets/images/players/' + player.avatar + ')'"></div>
+					<p>{{player.name}}</p>
+				</div>
+			</div>
+			<div class="empty_elem">
+				<img src="../../assets/images/empty_states.svg" alt="">
+				<p>No more adversary available</p>
+				<p>You'll be more lucky tomorrow</p>
+			</div>
+		</div>
+		<div class="footer" [ngClass]="{'blur': is_match_found}">
+			<div class="left">
+				<a class="success" (click)="click_left()">
+					<img src="../../assets/images/smash.png" alt="">
+				</a>
+			</div>
+			<div class="right">
+				<a class="fail" (click)="click_right()">
+					<img src="../../assets/images/nope.png" alt="">
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

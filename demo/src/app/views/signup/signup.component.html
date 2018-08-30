@@ -1,0 +1,28 @@
+<section class="discovery">
+	<div class="inner_container">
+		<div class="header">
+			<img src="../../assets/images/logo.jpg" alt="">
+		</div>
+		<div class="body">
+			<div class="input_group">
+				<label for="name_input">Given name <span class="required">*</span></label>
+				<input type="text" id="email_input" [(ngModel)]="user_information.name" placeholder="Annah">
+				<p class="informational_message" [innerHTML]="info_name | sanitizor"></p>
+			</div>
+			<div class="input_group">
+				<label for="email_input">Email address <span class="required">*</span></label>
+				<input type="text" id="email_input" [(ngModel)]="user_information.email" placeholder="annah.weng@gmail.com">
+				<p class="informational_message" [innerHTML]="info_email | sanitizor"></p>
+			</div>
+<!-- 			<div class="input_group">
+				<label for="rocket_name_input">Rocketchat username (with the @) <span class="required">*</span></label>
+				<input type="text" id="rocket_name_input" [(ngModel)]="user_information.rocket_name" placeholder="@annah.weng">
+				<p class="informational_message" [innerHTML]="info_rocket_name | sanitizor"></p>
+			</div> -->
+			
+		</div>
+		<div class="footer">
+			<a class="button" (click)="input_verification()">Create new account</a>
+		</div>
+	</div>
+</section>
