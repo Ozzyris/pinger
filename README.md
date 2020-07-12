@@ -1,2 +1,2 @@
-# Pinger
-Swipe to found a Table tennis adversary
+# Pinger 🏓
+Swipe to find a table tennis opponent! 
